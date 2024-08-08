@@ -1,0 +1,72 @@
+<div class="authentication-card-container"
+         fxLayout="column"
+         fxLayoutAlign="center">
+  <mat-card class="authentication-card">
+    <mat-card-header>
+      <mat-card-title>Contact Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="contactForm"
+            fxLayout="column"
+            fxLayoutAlign="center stretch">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Surname</mat-label>
+          <input matInput formControlName="surname" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category" [(value)]="selectedCategory" (selectionChange)="onCategoryChange($event.value)">
+            <mat-option [value]="null">None</mat-option>
+            <ng-container *ngFor="let category of categories">
+              <mat-option [value]="category" *ngIf="category">{{category}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="isBusinessCategory">
+          <mat-label>Sub Category</mat-label>
+          <mat-select formControlName="subCategory" [(value)]="selectedSubCategory" (selectionChange)="onSubCategoryChange($event.value)">
+            <mat-option [value]="null">None</mat-option>
+            <ng-container *ngFor="let subCategory of subCategories">
+              <mat-option [value]="subCategory" *ngIf="subCategory">{{subCategory}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="isOtherSubCategory">
+          <mat-label>Other Sub Category</mat-label>
+          <input matInput formControlName="otherSubCategory" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="phoneNumber" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Birth Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="birthDate">
+          <mat-hint>DD-MM-YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        Update
+      </button>
+      <button mat-raised-button color="primary" *ngIf="contactId" [routerLink]="['/contact', contactId,'updatepassword']">
+        Update password
+      </button>
+      <button mat-raised-button color="primary" (click)="onDelete()">
+        Delete
+      </button>
+    </mat-card-actions>
+  </mat-card>
+    </div>
+ 

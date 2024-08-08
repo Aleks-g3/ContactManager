@@ -1,0 +1,6 @@
+@ContactManager.Server_HostAddress = http://localhost:5023
+
+POST {{ContactManager.Server_HostAddress}}/getall/
+Accept: application/json
+
+###

@@ -1,0 +1,33 @@
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="contacts$ | async as contacts">
+      <ng-container *ngIf="contacts.length">
+        <tr *ngFor="let contact of contacts">
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.surname }}</td>
+          <td>{{ contact.email }}</td>
+          <td><a [routerLink]="['/contact', contact.id]" *ngIf="isLoggedIn">View details</a></td>
+        </tr>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="contacts$ | async as contacts">
+      <ng-container *ngIf="!contacts.length">
+        <tr>
+          <td align="center" colspan="4">No contacts</td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </tbody>
+</table>
+<div class="d-flex justify-content-center" *ngIf="isLoggedIn">
+  <button mat-raised-button color="primary" routerLink="/contactadd">Add contact</button>
+</div>

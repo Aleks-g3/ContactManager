@@ -1,0 +1,13 @@
+
+<div class="d-flex justify-content-end">
+  <nav *ngIf="!isLoggedIn">
+    <button mat-raised-button color="primary" routerLink="/login">login</button>
+  </nav>
+  <button *ngIf="isLoggedIn" mat-raised-button color="primary" (click)="logout()">Logout</button>
+</div>
+
+<nav>
+  <button mat-raised-button color="primary" routerLink="/contacts">Contacts</button>
+</nav>
+<router-outlet></router-outlet>
+
